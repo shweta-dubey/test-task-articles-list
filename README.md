@@ -1,4 +1,5 @@
-Step 1 : First need to clone this repo.
+Step 1 : First need to clone this repo by following command. 
+         git clone https://github.com/shweta-dubey/test-task-articles-list.git
 
 Step 2 : Install the node modules by following command 
          npm install
