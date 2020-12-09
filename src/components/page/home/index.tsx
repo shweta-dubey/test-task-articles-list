@@ -5,7 +5,7 @@ import * as actions from '../../../actions';
 import { articlesI } from './types';
 import "./home.scss"
 
-type propsI = {
+export type propsI = {
     articles: articlesI[]
     loadHomeData: () => void;
 };
@@ -26,7 +26,8 @@ class Home extends Component<propsI,stateI> {
 
     componentDidUpdate(prevProps: Readonly<propsI>, prevState: Readonly<stateI>, snapshot?: any) {
         const { articles } = this.props;
-        if(prevProps.articles !== articles){
+        const { articlesData } = this.state;
+        if(articles?.length > 0 && articlesData?.length === 0){
             this.setState({ articlesData : _.orderBy(articles, ['upvotes'], ['desc'])})
         }
     }
@@ -41,30 +42,36 @@ class Home extends Component<propsI,stateI> {
         return (
             <div className="home">
                 <div className="heading">Articles List</div>
-                <button type="button" onClick={() => this.handleSorting('upvotes')}> Most Upvoted </button>
-                <button type="button" onClick={() => this.handleSorting('date')}> Most Recent </button>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Sr No</th>
-                        <th>Title</th>
-                        <th>Upvotes</th>
-                        <th>Publish Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        articlesData.map((item,index) =>
+                <div className="articles-block">
+                    <div className="articles-upvoted-recent-btn">
+                        <button className="btn-upvoted" type="button" onClick={() => this.handleSorting('upvotes')}> Most Upvoted </button>
+                        <button className="btn-recent" type="button" onClick={() => this.handleSorting('date')}> Most Recent </button>
+                    </div>
+                    <div className="articles-table">
+                        <table>
+                            <thead>
                             <tr>
-                                <th scope="row">{index+1}</th>
-                                <td>{item.title}</td>
-                                <td>{item.upvotes}</td>
-                                <td>{item.date}</td>
+                                <th>Sr No</th>
+                                <th>Title</th>
+                                <th>Upvotes</th>
+                                <th>Publish Date</th>
                             </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody>
+                            {
+                                articlesData.map((item,index) =>
+                                    <tr>
+                                        <th scope="row">{index+1}</th>
+                                        <td>{item.title}</td>
+                                        <td>{item.upvotes}</td>
+                                        <td>{item.date}</td>
+                                    </tr>
+                                )
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         )
     }
