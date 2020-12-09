@@ -22,7 +22,6 @@ const Page404 = () => (
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            {/*<TopMenu></TopMenu>*/}
             <Switch>
                 <Route path="/" exact>
                     <Redirect to="/home" />

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash"
 import * as actions from '../../../actions';
 import { articlesI } from './types';
-import "./home.scss"
+import './home.scss'
 
 export type propsI = {
     articles: articlesI[]
@@ -17,7 +17,6 @@ type stateI = {
 class Home extends Component<propsI,stateI> {
     state = {
         articlesData: [] as articlesI[],
-        orderType:'desc'
     }
 
     componentDidMount() {
@@ -60,7 +59,7 @@ class Home extends Component<propsI,stateI> {
                             <tbody>
                             {
                                 articlesData.map((item,index) =>
-                                    <tr>
+                                    <tr key={index}>
                                         <th scope="row">{index+1}</th>
                                         <td>{item.title}</td>
                                         <td>{item.upvotes}</td>
