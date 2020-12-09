@@ -1,0 +1,1 @@
+export const LOAD_HOME_DATA = 'load-home-data';
